@@ -33,23 +33,16 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 留言板
 	links.push(LinkPresets.Guestbook);
 
+	// 应用下载（NativeChat）
+	links.push({
+		name: "下载 App",
+		url: "https://dl.mycathe.com/",
+		external: true,
+		icon: "material-symbols:android",
+	});
+
 	// 关于
 	links.push(LinkPresets.About);
-
-	// 自定义导航栏链接示例（取消注释即可使用）
-	// links.push({
-	// 	name: "链接",
-	// 	url: "#",
-	// 	icon: "material-symbols:link",
-	// 	children: [
-	// 		{
-	// 			name: "GitHub",
-	// 			url: "https://github.com/AnJianhe",
-	// 			external: true,
-	// 			icon: "fa7-brands:github",
-	// 		},
-	// 	],
-	// });
 
 	return { links } as NavBarConfig;
 };
