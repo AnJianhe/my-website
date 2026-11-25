@@ -1,0 +1,79 @@
+# Pages CMS 配置 —— 在 https://app.pagescms.org 登录后即可看到「文章」和「关于页」
+# 文档：https://pagescms.org/docs/
+
+media:
+  input: public/assets/images
+  output: /assets/images
+
+content:
+  - name: posts
+    label: 文章
+    type: collection
+    path: src/content/posts
+    view:
+      fields: [title, published, draft, category]
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+
+      - name: published
+        label: 发布日期
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: description
+        label: 摘要（列表里显示的一句话）
+        type: text
+
+      - name: image
+        label: 封面图
+        type: image
+
+      - name: tags
+        label: 标签
+        type: string
+        list: true
+
+      - name: category
+        label: 分类
+        type: string
+
+      - name: draft
+        label: 草稿（勾上则不发布）
+        type: boolean
+        default: false
+
+      - name: pinned
+        label: 置顶
+        type: boolean
+        default: false
+
+      - name: comment
+        label: 允许评论
+        type: boolean
+        default: true
+
+      - name: password
+        label: 访问密码（可选，留空则公开）
+        type: string
+
+      - name: passwordHint
+        label: 密码提示（可选）
+        type: string
+
+      - name: body
+        label: 正文
+        type: rich-text
+
+  - name: about
+    label: 关于页
+    type: file
+    path: src/content/spec/about.md
+    fields:
+      - name: body
+        label: 内容
+        type: rich-text
