@@ -7,10 +7,8 @@ import {
 
 // ============================================================================
 // 导航栏配置 - 根据顺序动态生成导航栏链接
-// NavBar Configuration - Dynamically generate navigation bar links based on order
 // ============================================================================
 const getDynamicNavBarConfig = (): NavBarConfig => {
-	// 基础导航栏链接
 	const links: NavBarLink[] = [
 		// 主页
 		LinkPresets.Home,
@@ -22,101 +20,35 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		url: "#",
 		icon: "material-symbols:article",
 		children: [
-			// 日志列表
 			LinkPresets.Blog,
-
-			// 归档
 			LinkPresets.Archive,
-
-			// 分类
 			LinkPresets.Categories,
-
-			// 标签
 			LinkPresets.Tags,
 		],
 	});
 
-	// 动态
-	links.push(LinkPresets.Dynamic);
-
-	// 我的及其子菜单
-	links.push(
-		// 追番
-		LinkPresets.Anime,
-
-		// // 番组计划
-		// LinkPresets.Bangumi,
-	);
-	// 摄影菜单
+	// 相册
 	links.push(LinkPresets.Gallery);
 
 	// 留言板
 	links.push(LinkPresets.Guestbook);
 
-	// 高斯泼溅场景
-	links.push({
-		name: "高斯场景",
-		url: "/app/",
-		icon: "material-symbols:3d-rotation",
-	});
+	// 关于
+	links.push(LinkPresets.About);
 
-	// 关于及其子菜单
-	links.push({
-		name: "关于",
-		url: "#",
-		icon: "material-symbols:info",
-		children: [
-			// 打赏
-			LinkPresets.Sponsor,
-
-			// 关于页面
-			LinkPresets.About,
-
-			// 友链
-			LinkPresets.Friends,
-		],
-	});
-
-	// 自定义导航栏链接
+	// 自定义导航栏链接示例（取消注释即可使用）
 	// links.push({
 	// 	name: "链接",
 	// 	url: "#",
 	// 	icon: "material-symbols:link",
-	// 	// 子菜单
 	// 	children: [
 	// 		{
 	// 			name: "GitHub",
-	// 			url: "https://github.com/CuteLeaf/Firefly",
+	// 			url: "https://github.com/AnJianhe",
 	// 			external: true,
 	// 			icon: "fa7-brands:github",
 	// 		},
-	// 		{
-	// 			name: "Gitee",
-	// 			url: "https://gitee.com/CuteLeaf/Firefly",
-	// 			external: true,
-	// 			icon: "fa7-brands:gitee",
-	// 		},
-	// 		{
-	// 			name: "QQ交流群",
-	// 			url: "https://qm.qq.com/q/ZGsFa8qX2G",
-	// 			external: true,
-	// 			icon: "fa7-brands:qq",
-	// 		},
-	// 		{
-	// 			name: "Firefly文档",
-	// 			url: "https://docs-firefly.cuteleaf.cn",
-	// 			external: true,
-	// 			icon: "material-symbols:docs",
-	// 		},
 	// 	],
-	// });
-
-	// 文档链接
-	// links.push({
-	// 	name: "文档",
-	// 	url: "https://docs-firefly.cuteleaf.cn",
-	// 	external: true,
-	// 	icon: "material-symbols:docs",
 	// });
 
 	return { links } as NavBarConfig;
@@ -129,7 +61,6 @@ export const navBarSearchConfig: NavBarSearchConfig = {
 
 // ============================================================================
 // 链接预设 - 可自由自定义导航栏链接的名称、图标和URL
-// Link Presets - Allows free customization of the name, icon, and URL of navigation bar links
 // ============================================================================
 export const LinkPresets: Record<string, NavBarLink> = {
 	Home: {
@@ -186,14 +117,8 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		url: "/about/",
 		icon: "material-symbols:person",
 	},
-	// Bangumi: {
-	// 	name: "番组计划",
-	// 	url: "/bangumi/",
-	// 	icon: "material-symbols:movie",
-	// 	pageKey: "bangumi",
-	// },
 	Gallery: {
-		name: "摄影",
+		name: "相册",
 		url: "/gallery/",
 		icon: "material-symbols:photo-library",
 		pageKey: "gallery",

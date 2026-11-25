@@ -4,55 +4,21 @@ import type { GalleryConfig } from "@/types/galleryConfig";
 export const galleryConfig: GalleryConfig = {
 	// 相册列表
 	albums: [
-		// 支持jpg/png/webp/avif/gif格式
-		// id: 相册唯一标识符（用于目录命名和URL路径），比如设置：id: "firefly-2026", 对应 public/gallery/firefly-2026/目录
-		// cover: 手动指定封面图（可选，不填会把cover.*文件作为封面图，如果没有cover.*文件，则使用第一张图片作为封面图）
-		// name: 相册名称
-		// description: 相册描述
-		// location: 相册拍摄地点
-		// date: 相册日期，格式为 YYYY-MM-DD，用于排序和显示
-		// tags: 相册标签，用于分类和过滤
-		// password: 访问密码，设置后需要输入密码才能查看相册内容（可选）
-		// passwordHint: 密码提示，设置后在输入密码错误时显示（可选，需配合password使用）
-		// 每添加一个数组项就相当于添加了一个相册，记得在 public/gallery/ 目录下创建对应的子目录并放入图片
+		// 添加相册的步骤：
+		// 1. 在 public/gallery/ 下新建一个目录，例如 public/gallery/2026-trip/
+		// 2. 把照片（jpg/png/webp/avif/gif）放进去，可放一张 cover.* 作为封面
+		// 3. 在下面加一项配置，id 和目录名一致
+		//
 		// {
-		// 	id: "firefly-2026",
-		// 	name: "可爱流萤",
-		// 	description: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
-		// 	location: "崩坏：星穹铁道",
-		// 	date: "2026-01-01",
-		// 	tags: ["崩坏星穹铁道", "流萤"],
+		// 	id: "2026-trip",
+		// 	name: "2026 旅行",
+		// 	description: "随手拍的一些风景",
+		// 	location: "浙江",
+		// 	date: "2026-11-25",
+		// 	tags: ["风景"],
 		// },
-		// {
-		// 	id: "encrypted-test",
-		// 	name: "加密相册示例",
-		// 	description:
-		// 		"这是一个加密相册的示例，设置了访问密码，只有输入正确的密码才能查看相册内容。",
-		// 	location: "崩坏：星穹铁道",
-		// 	date: "2026-02-01",
-		// 	tags: ["加密相册", "示例"],
-		// 	password: "123456",
-		// 	passwordHint: "示例密码123456",
-		// },
-		{
-			id: "portrait",
-			name: "人像摄影",
-			description: "一些人像摄影作品的展示",
-			location: "中国",
-			date: "2026-06-01",
-			tags: ["人像"],
-		},
-		{
-			id: "scenery",
-			name: "风光摄影",
-			description: "一些风光摄影作品的展示",
-			location: "中国",
-			date: "2026-06-01",
-			tags: ["风光"],
-		},
 	],
 
 	// 瀑布流最小列宽(px)，浏览器根据容器宽度自动计算列数，默认 240
-	// 值越小列数越多，值越大列数越少
 	columnWidth: 240,
 };
