@@ -1,22 +1,17 @@
 import type { BackgroundWallpaperConfig } from "@/types/backgroundWallpaper";
 
 export const backgroundWallpaper: BackgroundWallpaperConfig = {
-	// 壁纸模式："banner" 顶部横幅，"fullscreen" 全屏壁纸，"overlay" 全屏透明（图在卡片下面），"none" 纯色
-	// overlay：背景图铺满整页，内容卡片半透明浮在上面，形成毛玻璃效果
 	mode: "overlay",
-	// 不允许访客自行切换模式，避免切换时过渡错乱
 	switchable: false,
 	playerEnable: false,
 
 	src: {
-		// 桌面背景（远程 URL，已提前压成 WebP）
 		desktop: ["https://dl.mycathe.com/img/bg-desk.webp"],
-		// 移动背景
 		mobile: ["https://dl.mycathe.com/img/bg-mobile.webp"],
 	},
 
 	common: {
-		dimOpacity: 0.2,
+		dimOpacity: 0.15,
 		playerMode: "random",
 		homeText: {
 			enable: true,
@@ -65,12 +60,11 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		},
 	},
 
-	// banner 模式配置（当前未使用）
 	banner: {
 		position: "center",
 	},
 
-	// overlay 模式：背景图铺满，卡片半透明浮在上面
+	// overlay 模式：背景图铺满整页，卡片毛玻璃浮在上面
 	overlay: {
 		switchable: {
 			opacity: true,
@@ -78,12 +72,12 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			cardOpacity: true,
 		},
 		zIndex: -1,
-		// 背景图不透明度，略降让文字更清楚
-		opacity: 0.85,
-		// 背景模糊程度
-		blur: 6,
-		// 卡片透明度，越小越透（越能看见背景）
-		cardOpacity: 0.55,
+		// 背景图几乎不透明，让图片看清楚
+		opacity: 0.95,
+		// 背景模糊降到最低（只做轻微柔化，方便文字阅读）
+		blur: 1,
+		// 卡片透明度，越小越透
+		cardOpacity: 0.5,
 	},
 
 	fullscreen: {
