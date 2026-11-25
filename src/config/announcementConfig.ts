@@ -4,8 +4,8 @@ export const announcementConfig: AnnouncementConfig = {
 	// 公告标题
 	title: "公告",
 
-	// 公告内容
-	content: "矣矣矣",
+	// 公告内容（使用 Unicode 转义写入，避免编码丢字）
+	content: "\u6840\u6840\u6840",
 
 	// 是否允许用户关闭公告
 	closable: true,
