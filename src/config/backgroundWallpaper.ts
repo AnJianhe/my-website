@@ -4,26 +4,16 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	// 壁纸模式："banner" 横幅壁纸，"fullscreen" 全屏壁纸，"overlay" 全屏透明，"none" 纯色背景无壁纸
 	mode: "banner",
 	// 是否允许用户通过导航栏切换壁纸模式
-	// 关闭可避免切换时的过渡错乱，推荐只保留 banner 模式
 	switchable: false,
 	// 是否启用背景视频播放（已关闭）
 	playerEnable: false,
 
 	src: {
-		// 桌面背景图片（支持单张或多张随机）
-		// 想换成自己的图：把图片放进 src/assets/images/DesktopWallpaper/，再把文件名写进来
-		// 想用随机图 API：desktop: "https://t.alcy.cc/pc"
-		desktop: [
-			"assets/images/DesktopWallpaper/wallpaper.avif",
-			"assets/images/DesktopWallpaper/wallpaper2.avif",
-		],
-		// 移动背景图片（支持单张或多张随机）
-		mobile: [
-			"assets/images/MobileWallpaper/mwallpaper.avif",
-			"assets/images/MobileWallpaper/mwallpaper2.avif",
-		],
-		// 背景视频已移除（原先指向外部地址，已停用）
-		// playerUrl: [""],
+		// 桌面背景（远程 URL，不会被 Astro 处理，已提前压成 WebP）
+		// 想换图：直接改地址，或把图片放进 src/assets/images/DesktopWallpaper/ 后写相对路径
+		desktop: ["https://dl.mycathe.com/img/bg-desk.webp"],
+		// 移动背景
+		mobile: ["https://dl.mycathe.com/img/bg-mobile.webp"],
 	},
 
 	// 横幅壁纸和全屏壁纸共享配置
@@ -53,23 +43,16 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",
 			typewriter: {
-				// 打字机效果
 				enable: true,
-				// 打字速度（毫秒）
 				speed: 100,
-				// 删除速度（毫秒）
 				deleteSpeed: 50,
-				// 完全显示后的暂停时间（毫秒）
 				pauseTime: 2000,
 			},
 		},
 		// 导航栏配置
 		navbar: {
-			// 导航栏透明模式："semi" 半透明，"full" 完全透明，"semifull" 动态透明
 			transparentMode: "semi",
-			// 是否开启毛玻璃模糊效果
 			enableBlur: true,
-			// 毛玻璃模糊度
 			blur: 5,
 		},
 		// 水波纹动画效果配置
@@ -100,7 +83,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 
 	// Banner模式特有配置
 	banner: {
-		position: "0% 20%",
+		position: "center",
 	},
 
 	// 全屏透明覆盖模式特有配置
