@@ -1,60 +1,62 @@
 ---
+import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
-import { appConfig } from "@/config";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 
-const title = "应用";
-const description = "这里展示当前可用的应用，点击卡片即可打开。";
-
-const apps = appConfig.filter((app) => app.enabled !== false);
+const scenes = (await getCollection("scenes")).sort((a, b) =>
+	a.data.title.localeCompare(b.data.title, "zh-CN"),
+);
+const title = "高斯泼溅场景";
+const number = new Intl.NumberFormat("zh-CN");
 ---
 
-<MainGridLayout title={title} description={description}>
-  <section class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-    {apps.map((app) => (
-      <a
-        href={app.url}
-        target="_blank"
-        rel="noreferrer noopener"
-        class="group card-base flex flex-col justify-between overflow-hidden rounded-[1.5rem] border border-(--line-divider) bg-(--card-bg) shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-      >
-        {app.image && (
-          <div class="relative overflow-hidden bg-neutral-100 dark:bg-neutral-950">
-            <img
-              src={app.image}
-              alt={app.name}
-              width="960"
-              height="540"
-              loading="lazy"
-              decoding="async"
-              class="aspect-video h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
-        )}
-        <div class="flex flex-col justify-between p-6">
-          <div>
-            <div class="flex items-center justify-between gap-3 mb-4">
-              <div class="flex items-center gap-3">
-                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-(--primary) text-white shadow-md">
-                  <Icon is:inline name={app.icon} class="text-2xl" />
-                </div>
-                <div>
-                  <h2 class="text-xl font-semibold text-neutral-900 dark:text-neutral-100">{app.name}</h2>
-                  <p class="text-sm text-neutral-500 dark:text-neutral-400">{app.tags?.join(" · ")}</p>
-                </div>
-              </div>
-              <div class="rounded-full border border-(--primary) px-3 py-1 text-sm font-medium text-(--primary)">进入</div>
-            </div>
-
-            <p class="text-base leading-relaxed text-neutral-600 dark:text-neutral-400">{app.description}</p>
-          </div>
-
-          <div class="mt-6 flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400">
-            <Icon is:inline name="material-symbols:open-in-new" class="text-lg" />
-            <span>在新标签页中打开应用</span>
-          </div>
-        </div>
-      </a>
-    ))}
-  </section>
+<MainGridLayout title={title} description="探索我训练的三维高斯泼溅场景。">
+	<section class="card-base scene-directory">
+		<header class="directory-heading">
+			<h1 class="text-90">{title}</h1>
+			<span class="text-75">{scenes.length} 个场景</span>
+		</header>
+		<ul>
+			{scenes.map(({ id, data }) => (
+				<li>
+					<a class="scene-row" href={`/app/${id}/`} data-no-swup>
+						<img src={`/scenes/${id}/cover.webp`} alt="" width="720" height="480" loading="lazy" />
+						<div class="scene-info">
+							<h2 class="text-90">{data.title}</h2>
+							<p class="text-75">{number.format(data.gaussians)} 个高斯点</p>
+						</div>
+						<span class="explore">
+							<Icon is:inline name="material-symbols:3d-rotation" />
+							探索场景
+						</span>
+					</a>
+				</li>
+			))}
+		</ul>
+	</section>
 </MainGridLayout>
+
+<style>
+	.scene-directory { padding: clamp(1rem, 3vw, 2rem); }
+	.directory-heading, .scene-row, .explore { display: flex; align-items: center; }
+	.directory-heading { justify-content: space-between; gap: 1rem; padding-bottom: 1.25rem; }
+	h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; }
+	.directory-heading span, .scene-info p, .explore { font-size: .875rem; }
+	li { border-top: 1px solid var(--line-divider); }
+	.scene-row { gap: clamp(.9rem, 3vw, 1.75rem); padding: 1.15rem 0; }
+	li:last-child .scene-row { padding-bottom: 0; }
+	.scene-row img { width: clamp(6rem, 26%, 13rem); aspect-ratio: 3 / 2; height: auto; object-fit: cover; border-radius: .75rem; }
+	.scene-info { flex: 1; min-width: 0; }
+	h2 { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 650; }
+	.scene-info p { margin-top: .3rem; font-variant-numeric: tabular-nums; }
+	.explore { gap: .4rem; color: var(--btn-content); font-weight: 600; }
+	.explore :global(svg) { width: 1.25rem; height: 1.25rem; }
+	.scene-row:hover h2, .scene-row:focus-visible h2 { color: var(--primary); }
+	.scene-row:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+	@media (max-width: 36rem) {
+		.scene-row { display: grid; grid-template-columns: 6rem 1fr; gap: .25rem 1rem; }
+		.scene-row img { grid-row: span 2; width: 100%; }
+		.scene-info { align-self: end; }
+		.explore { align-self: start; }
+	}
+</style>

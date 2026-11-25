@@ -1,4 +1,5 @@
 import { defineCollection } from "astro:content";
+import { CAMERA_FOV_RANGE } from "@playcanvas/supersplat-viewer/settings";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
@@ -43,7 +44,27 @@ const dynamicCollection = defineCollection({
 	}),
 });
 
+const sceneVector = z.tuple([z.number(), z.number(), z.number()]);
+const scenesCollection = defineCollection({
+	loader: glob({
+		base: "./public/scenes",
+		pattern: "*/scene.json",
+		generateId: ({ entry }) => entry.split("/")[0],
+	}),
+	schema: z.object({
+		title: z.string(),
+		model: z.string(),
+		gaussians: z.number().int().positive(),
+		camera: z.object({
+			position: sceneVector,
+			target: sceneVector,
+			fov: z.number().min(CAMERA_FOV_RANGE.min).max(CAMERA_FOV_RANGE.max),
+		}),
+	}),
+});
+
 export const collections = {
+	scenes: scenesCollection,
 	dynamic: dynamicCollection,
 	posts: postsCollection,
 	spec: specCollection,

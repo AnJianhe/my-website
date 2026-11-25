@@ -53,11 +53,11 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 留言板
 	links.push(LinkPresets.Guestbook);
 
-	// 应用
+	// 高斯泼溅场景
 	links.push({
-		name: "应用",
+		name: "高斯场景",
 		url: "/app/",
-		icon: "material-symbols:apps",
+		icon: "material-symbols:3d-rotation",
 	});
 
 	// 关于及其子菜单

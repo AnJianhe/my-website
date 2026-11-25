@@ -1,0 +1,111 @@
+---
+import { getCollection } from "astro:content";
+import { defaultSettings } from "@playcanvas/supersplat-viewer/settings";
+import type { InferGetStaticPropsType } from "astro";
+import "@playcanvas/supersplat-viewer/viewer.css";
+
+export async function getStaticPaths() {
+	const scenes = await getCollection("scenes");
+	return scenes.map((scene) => ({
+		params: { scene: scene.id },
+		props: { scene },
+	}));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { id, data } = Astro.props.scene;
+const directory = `/scenes/${id}/`;
+const settings = defaultSettings("object");
+settings.cameras = [{ initial: data.camera }];
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="theme-color" content="#191919" />
+		<link rel="icon" href="/favicon/favicon.ico" />
+		<title>{data.title} · 高斯泼溅场景</title>
+	</head>
+	<body>
+		<header>
+			<nav aria-label="场景导航">
+				<a href="/app/">场景目录</a>
+				<span aria-hidden="true">/</span>
+				<h1>{data.title}</h1>
+			</nav>
+			<p class="pointer-hint">拖动旋转 · 滚轮缩放</p>
+			<p class="touch-hint">单指旋转 · 双指缩放</p>
+		</header>
+		<main aria-label={`探索${data.title}`}>
+			<div
+				id="scene-viewer"
+				data-model={directory + data.model}
+				data-cover={directory + "cover.webp"}
+				data-settings={JSON.stringify(settings)}
+			></div>
+			<p id="scene-status" role="status">正在载入场景…</p>
+		</main>
+		<script>
+			import {
+				CAMERA_FOV_RANGE,
+				type ExperienceSettings,
+			} from "@playcanvas/supersplat-viewer/settings";
+			import { createViewer } from "@playcanvas/supersplat-viewer/viewer";
+
+			const container = document.querySelector<HTMLElement>("#scene-viewer")!;
+			const status = document.querySelector<HTMLElement>("#scene-status")!;
+			try {
+				const settings: ExperienceSettings = JSON.parse(container.dataset.settings!);
+				const camera = settings.cameras[0].initial;
+				const { clientHeight: height, clientWidth: width } = container;
+				// PlayCanvas measures FOV vertically in portrait and horizontally in landscape.
+				if (height > width && width > 0) {
+					const halfAngle = camera.fov * Math.PI / 360;
+					const portraitFov = Math.atan(Math.tan(halfAngle) * height / width) * 360 / Math.PI;
+					camera.fov = Math.min(portraitFov, CAMERA_FOV_RANGE.max);
+				}
+
+				const viewer = await createViewer({
+					container,
+					contentUrl: container.dataset.model!,
+					posterUrl: container.dataset.cover!,
+					settings,
+					lang: "zh-CN",
+					noanim: true,
+				});
+				status.hidden = true;
+				const startOrbit = () => {
+					viewer.state.cameraMode = "orbit";
+				};
+				if (viewer.state.loaded) startOrbit();
+				else viewer.events.once("loaded:changed", startOrbit);
+				window.addEventListener("pagehide", (event) => {
+					if (!event.persisted) viewer.destroy();
+				});
+			} catch (error) {
+				status.textContent = "场景加载失败，请刷新页面重试。";
+				console.error(error);
+			}
+		</script>
+	</body>
+</html>
+
+<style>
+	:global(*) { box-sizing: border-box; }
+	body { margin: 0; height: 100vh; height: 100dvh; display: grid; grid-template-rows: auto minmax(0, 1fr); background: #191919; color: #fafafa; font-family: system-ui, sans-serif; }
+	header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .25rem 1.25rem; padding: .6rem max(1rem, env(safe-area-inset-right)) .6rem max(1rem, env(safe-area-inset-left)); border-bottom: 1px solid #393939; }
+	nav { display: flex; align-items: center; gap: .8rem; min-height: 2.5rem; }
+	nav a { display: inline-flex; align-items: center; min-height: 2.75rem; color: #e3d4bd; text-decoration: none; }
+	nav a:hover, nav a:focus-visible { text-decoration: underline; }
+	nav span { color: #817973; }
+	h1 { margin: 0; font-size: 1.125rem; font-weight: 650; }
+	header p { margin: 0; color: #bfbcb8; font-size: .875rem; }
+	.touch-hint { display: none; }
+	@media (pointer: coarse) { .pointer-hint { display: none; } .touch-hint { display: block; } }
+	main { position: relative; min-height: 0; }
+	#scene-viewer { position: absolute; inset: 0; }
+	#scene-status { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; padding: .65rem 1rem; border-radius: .5rem; background: #181818eb; text-align: center; }
+</style>
