@@ -4,7 +4,7 @@ published: 2026-11-27
 description: 从防爆音到格式化，一个校园记录者的设备工作流。设备不是目的，它只是让记录变得可能，也让记录变得手忙脚乱。
 tags: [记录, 设备, 工作流, 随笔]
 category: 随笔
-draft: false
+draft: true
 ---
 
 我本来只想记录一天。
