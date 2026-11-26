@@ -1,5 +1,5 @@
 ---
-title: 把 DeepSeek 的对话搬进 NativeChat
+title: DeepSeek 聊天记录怎么导出？四步拿到 zip，再导入 NativeChat
 published: 2026-11-26
 description: 在 DeepSeek App 里导出全部历史对话，再导入 NativeChat 的完整步骤，附注意事项与风险提示。
 tags: [教程, DeepSeek, NativeChat, Android]
