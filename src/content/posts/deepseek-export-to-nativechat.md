@@ -13,23 +13,26 @@ draft: true
 
 ## 一、在 DeepSeek 里导出
 
+四步就能拿到压缩包：
+
+[grid]
+![1. 点左上角菜单](https://dl.mycathe.com/img/tutorial/step1-lg.webp)
+![2. 点左下角头像](https://dl.mycathe.com/img/tutorial/step2-lg.webp)
+![3. 设置里点数据管理](https://dl.mycathe.com/img/tutorial/step3-lg.webp)
+![4. 点导出所有历史对话](https://dl.mycathe.com/img/tutorial/step4-lg.webp)
+[/grid]
+
 ### 1. 打开 App，点左上角菜单
 
 在主界面点左上角的「☰」，展开会话列表。
-
-![DeepSeek 主界面，箭头指向左上角菜单](https://dl.mycathe.com/img/tutorial/step1-lg.webp)
 
 ### 2. 点左下角的头像
 
 会话列表展开后，底部左侧会显示你的头像和账号。点它，进入设置。
 
-![会话列表，箭头指向左下角头像](https://dl.mycathe.com/img/tutorial/step2-lg.webp)
-
 ### 3. 在「账户」里点「数据管理」
 
 设置页从上到下是「账户 / 应用 / 语音 / 关于」几个分组。第一组「账户」里有两项，点下面的「数据管理」。
-
-![设置页，箭头指向数据管理](https://dl.mycathe.com/img/tutorial/step3-lg.webp)
 
 ### 4. 点「导出所有历史对话」
 
@@ -41,8 +44,6 @@ draft: true
 - 删除所有历史对话（红色）
 
 点第三项。
-
-![数据管理页，箭头指向导出所有历史对话](https://dl.mycathe.com/img/tutorial/step4-lg.webp)
 
 ### 5. 等打包，然后保存文件
 
