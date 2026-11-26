@@ -1,7 +1,8 @@
 ---
-title: 没有 Gradle，我在手机里手搓了一个安卓 App
+title: 没有 Gradle，我在手机里手搓了一个 AI App
 published: 2026-11-26
 description: 从网页版到一个能装的 APK：协议、构建链、上下文、附件、导入导出，以及三十多个构建中踩过的坑。
+image: https://dl.mycathe.com/img/cover-nativechat.webp
 tags: [开发记录, Android, NativeChat, Java]
 category: 开发记录
 draft: true
