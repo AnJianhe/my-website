@@ -1,5 +1,5 @@
 ---
-title: 为什么要自己写一个安卓聊天客户端，以及它是怎么被造出来的
+title: 没有 Gradle，我在手机里手搓了一个安卓 App
 published: 2026-11-26
 description: 从网页版到一个能装的 APK：协议、构建链、上下文、附件、导入导出，以及三十多个构建中踩过的坑。
 tags: [开发记录, Android, NativeChat, Java]
