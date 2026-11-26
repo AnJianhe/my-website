@@ -4,7 +4,7 @@ published: 2026-11-26
 description: 在 DeepSeek App 里导出全部历史对话，再导入 NativeChat 的完整步骤，附注意事项与风险提示。
 tags: [教程, DeepSeek, NativeChat, Android]
 category: 教程
-draft: true
+draft: false
 ---
 
 换一个 App，最麻烦的往往不是重新下载，而是旧的聊天记录搬不过去。这篇记录我自己走通的路径：先把 DeepSeek 里的全部对话导出来，再导入 NativeChat。

@@ -5,7 +5,7 @@ description: 从网页版到一个能装的 APK：协议、构建链、上下文
 image: https://dl.mycathe.com/img/cover-nativechat.webp
 tags: [开发记录, Android, NativeChat, Java]
 category: 开发记录
-draft: true
+draft: false
 ---
 
 事情的起点很具体：网页版的聊天用得还算顺手，但它在手机上不对劲。输入框会跳、切后台就重载、附件传一半断掉就没了。
